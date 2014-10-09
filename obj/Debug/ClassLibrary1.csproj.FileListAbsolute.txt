@@ -1,0 +1,11 @@
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\TaringaApi.dll
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\TaringaApi.pdb
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\TaringaApi.dll
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\TaringaApi.pdb
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\ClassLibrary1.csprojResolveAssemblyReference.cache
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\TaringaApi.dll.config
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\antlr.runtime.dll
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\log4net.dll
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\log4net.xml
