@@ -117,7 +117,12 @@ Obtiene el rango del usuario especificado (ej: "Silver") .
 Nickname= El nombre de usuario
 id= el id del usuario
 
-## we ##
+## ToDo ##
+
+Implementar Websocket para el RealTime (notificaciones en tiempo real)
+Implementar requests asíncronos.
+
+## ue ##
 
 Proximamente voy a subir con más metodos y cositas.
 
