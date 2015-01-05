@@ -18,18 +18,19 @@ Nota, al crear una nueva instancia, no se logueará, hay un método específico 
 
 **Visual Basic**
 
-    Dim Api as ClassLibrary1.TaringaApi
-    Api = new ClassLibrary1.TaringaApi("Usuario", "Contraseña")
+    Dim Api as TaringaApi
+    Api = new TaringaApi("Usuario", "Contraseña")
 
 **C#**
 
-    ClassLibrary1.TaringaApi Api;
-    Api = new ClassLibrary1.TaringaApi("Usuario", "Contraseña");
+    TaringaApi Api;
+    Api = new TaringaApi("Usuario", "Contraseña");
 
 Login de usuario
 ----------------
 
-Existe un método que inicia sesión y devuelve el resultado en json, el método es el siguente:
+Existe un método que inicia sesión y genera un evento de login (toLogin(LoginArgs args))
+
 
 **Visual Basic**
 
@@ -39,53 +40,23 @@ Existe un método que inicia sesión y devuelve el resultado en json, el método
 
     public string login()
 
-Si es correcto devuelve en formato json lo siguente:
+Cuando se haya concretado la transacción, invoca al evento "toLogin"
 
-    {"status":1,"data":""}
+LoginArgs contiene:
+	string Result: Resultado de la peticion de login
+
+Si es correcto devuelve:
+
+    "true"
 
 Si el usuario y contraseña no coinciden:
 
-    "{\"status\":0,\"data\":\"Datos no v&aacute;lidos<br\\/><a href=\\\"\\/recuperar-clave\\\">&iquest;Olvidaste tu contrase&ntilde;a?<\\/a>\"}"
+    "Datos incorrectos"
 
 Si el usuario se encuentra suspendido
 
-    "{\"status\":2,\"data\":{\"causa\":\"[causa]\",\"fecha\":\"[fecha]\",\"duracion\":\"[duración]\",\"fecha_rehabilitacion\":\"[rehabilitación]\",\"falta\":\"[Tiempo restante]\"}}"
+    "Esta cuenta se encuentra suspendida."
 
-Ejemplo:
-
-**Visual Basic**
-
-    Public sub Main()
-    
-    Dim Api as ClassLibrary1.TaringaApi
-    Console.Write("Escriba el usuario: ")
-    Dim Usuario as String = Console.ReadLine()
-    Console.Write("Escriba su contraseña: ")
-    Dim Password as String = Console.ReadLine()
-    Console.WriteLine("Procesando")
-    
-    Api= New ClassLibrary1.TaringaApi(Usuario, Password)
-    
-    Dim Resultado as String = Api.login()
-    Console.WriteLine("Resultado: {0}", Resultado)
-    Console.Read()     
-      
-    End Sub
-
-**C#**
-
-    static void Main(string[] args){
-	    Console.WriteLine("Escriba el Usuario: ");
-	    var usuario = Console.ReadLine();
-	    Console.WriteLine("Escriba su contraseña: ");
-	    var password = Console.ReadLine();
-	    Console.WriteLine("Procesando");
-	    
-	    var api = new ClassLibrary1.TaringaApi(usuario, password);
-	    var resultado = api.login();
-	    Console.WriteLine("Resultado: {0}", resultado);
-	    Console.Read();
-    }
 
 Métodos Públicos
 -------
