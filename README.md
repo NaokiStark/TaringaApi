@@ -29,7 +29,7 @@ Nota, al crear una nueva instancia, no se logueará, hay un método específico 
 Login de usuario
 ----------------
 
-Existe un método que inicia sesión y genera un evento de login (toLogin(LoginArgs args))
+Existe un método que inicia sesión y genera un evento de login (onLogin(LoginArgs args))
 
 
 **Visual Basic**
@@ -40,7 +40,7 @@ Existe un método que inicia sesión y genera un evento de login (toLogin(LoginA
 
     public string login()
 
-Cuando se haya concretado la transacción, invoca al evento "toLogin"
+Cuando se haya concretado la transacción, invoca al evento "onLogin"
 
 LoginArgs contiene:
 	string Result: Resultado de la peticion de login
@@ -57,6 +57,20 @@ Si el usuario se encuentra suspendido
 
     "Esta cuenta se encuentra suspendida."
 
+Ejemplo:
+
+```C#
+	TaringaApi api;
+	void Iniciar(string usuario, string pass){
+		api= new TaringaApi(usuario, pass);
+		api.onLogin+=(resultado)=>{
+			//Hacer algo con el resultado
+			Console.WriteLine(resultado);
+		};
+		api.login();
+	}
+	
+```
 
 Métodos Públicos
 -------
