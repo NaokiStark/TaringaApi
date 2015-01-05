@@ -3,7 +3,12 @@ Api de Taringa
 
 ## Descripción ##
 
-Api no Oficial de Taringa para .Net
+Api no Oficial de Taringa para .Net 4.5
+
+## Dependencias ##
+
+Newtonsoft.Json
+(https://www.nuget.org/packages/Newtonsoft.Json/)
 
 ¿Cómo usarla?
 -------------
