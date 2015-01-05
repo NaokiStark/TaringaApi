@@ -3,6 +3,6 @@ C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\TaringaApi.dll
 C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\TaringaApi.pdb
 C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\TaringaApi.csprojResolveAssemblyReference.cache
 C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\TaringaApi.dll
 C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\TaringaApi.pdb
+C:\Users\Fabian\bot.net\IRCBot\ClassLibrary1\obj\Debug\TaringaApi.csprojResolveAssemblyReference.cache

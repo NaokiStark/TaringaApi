@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class HTTPRequests
+    public class HTTPRequests
     {
         CookieContainer cookieCont = new CookieContainer();
         HttpWebRequest request;
         HttpWebResponse response;
+        StreamReader re;
+        public delegate void onRecieveAscync(object sender, dResponse e);
+        public event onRecieveAscync onRecieveAsync;
+
+        public void onRecieve(dResponse e){
+            if (onRecieveAsync != null)
+                onRecieveAsync(this, e);
+            re = e.StrRe;
+        }
+
         public string getRequest(string Url)
         {
             try
@@ -75,54 +87,66 @@ namespace ClassLibrary1
             
         }
 
-        public string postRequest(string Url,string postData){
-
-            return postRequest(Url, postData, false);
-
-        }
-        public string postRequest(string Url, string postData,bool isAjaxRequest)
+        
+        public void postRequest(string Url, string postData,string type,bool isAjaxRequest = false)
         {
+            Thread r = new Thread(new  ThreadStart(() => {
+                try
+                {
+                    ASCIIEncoding ascii = new ASCIIEncoding();
+                    byte[] postBytes = ascii.GetBytes(postData.ToString());
 
-            StreamReader ddResponse;
-            ASCIIEncoding ascii = new ASCIIEncoding();
-            byte[] postBytes = ascii.GetBytes(postData.ToString());
+                    request = (HttpWebRequest)HttpWebRequest.Create(Url);
+                    request.CookieContainer = cookieCont;
 
-            request = (HttpWebRequest)HttpWebRequest.Create(Url);
-            request.CookieContainer = cookieCont;
+                    request.Method = "POST";
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.ContentLength = postBytes.Length;
+                    //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36";
+                    request.UserAgent = "PTaringa/2.2";
+                    if (isAjaxRequest)
+                    {
+                        request.Headers["X-Requested-With"] = "XMLHttpRequest";
+                    }
+                    request.Headers["Origin"] = "http://www.taringa.net";
+                    //request.Host = "http://www.taringa.net";
+                    request.Referer = "http://www.taringa.net/";
+                    request.Accept = "application/json, text/javascript, */*; q=0.01";
 
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = postBytes.Length;
-            //request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.143 Safari/537.36";
-            request.UserAgent = "PTaringa/2.2";
-            if (isAjaxRequest)
-            {
-               request.Headers["X-Requested-With"] = "XMLHttpRequest";
-            }
-            request.Headers["Origin"] = "http://www.taringa.net";
-            //request.Host = "http://www.taringa.net";
-            request.Referer = "http://www.taringa.net/";
-            request.Accept = "application/json, text/javascript, */*; q=0.01";
+                    Stream postStream = request.GetRequestStream();
+                    postStream.Write(postBytes, 0, postBytes.Length);
+                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    StreamReader ddResponse = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                    dResponse je = new dResponse();
+                    je.StrRe = ddResponse;
+                    je.response = ddResponse.ReadToEnd();
+                    je.type = type;
+                    onRecieve(je);
+                }
+                catch
+                {
+                    dResponse je = new dResponse();
 
-            Stream postStream = request.GetRequestStream();
-            postStream.Write(postBytes, 0, postBytes.Length);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            ddResponse = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            postStream.Flush();
-            postStream.Close();
-
-            return ddResponse.ReadToEnd();
+                    je.StrRe = null;
+                    je.response = "false";
+                    je.type = type;
+                    onRecieve(je);
+                }
+           }));
+            r.Start();
         }
 
         //Delegate For ascyn request
         public delegate void wee(WebException e);
         public WebException wer { get; set; }
         public void returnWebException(WebException e) { wer = e; }
-        
+
 
         public delegate void ProcessRequest(StreamReader e);
         public StreamReader rRequestStream { get; set; }
         public void ReturnRequestStream(StreamReader e) { rRequestStream = e; }
+       
         
     }
+    
 }
