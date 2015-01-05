@@ -63,9 +63,9 @@ Ejemplo:
 	TaringaApi api;
 	void Iniciar(string usuario, string pass){
 		api= new TaringaApi(usuario, pass);
-		api.onLogin+=(resultado)=>{
+		api.onLogin+=(args)=>{
 			//Hacer algo con el resultado
-			Console.WriteLine(resultado);
+			Console.WriteLine(args.Result);
 		};
 		api.login();
 	}
