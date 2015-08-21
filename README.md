@@ -29,16 +29,16 @@ Nota, al crear una nueva instancia, no se logueará, hay un método específico 
 Login de usuario
 ----------------
 
-Existe un método que inicia sesión y genera un evento de login (onLogin(LoginArgs args))
+Existe un método que inicia sesión y genera un evento de AsyncLogin (onLogin(LoginArgs args))
 
 
 **Visual Basic**
 
-    Public Function login() as String
+    Public Function AsyncLogin() as String
 
 **C#**
 
-    public string login()
+    public string AsyncLogin()
 
 Cuando se haya concretado la transacción, invoca al evento "onLogin"
 
@@ -67,15 +67,21 @@ Ejemplo:
 			//Hacer algo con el resultado
 			Console.WriteLine(args.Result);
 		};
-		api.login();
+		api.AsyncLogin();
 	}
 	
 ```
 
+También existe el método sicrónico y devuelve "true" si es exitoso, "Datos incorrectos" y "suspended"
+
+**C#**
+
+    public string SyncLogin()
+
 Métodos Públicos
 -------
 
-**string login()**
+**string AsyncLogin()**
 
 Inicia sesión
 
