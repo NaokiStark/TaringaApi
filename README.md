@@ -1,3 +1,6 @@
+No utilizar, tiene problemas.
+=======
+
 Api de Taringa
 =======
 
